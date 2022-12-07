@@ -1,0 +1,4 @@
+<h2>Firebase Web Push Notification Example</h2>
+<h4>Device Token is: </h4><p id="token"></p>
+<button onclick= "showToken()">Show Registration Token</button><br><br>
+<%= button_to 'Send Test Notification Using fcm gem', users_fcm_push_notification_path, method: :post, remote: true  %>

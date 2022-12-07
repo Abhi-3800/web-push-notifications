@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notify</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <%= yield %>
+      <script type="module" src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js"></script>
+      <script type="module" src="https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging.js"></script>
+      <script type="text/javascript" src="firebase-messaging-sw.js"></script>
+      
+      <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+      import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging.js";
+      
+      const config = {
+        apiKey: "AIzaSyCrU4mU0UVcdPpIkPH_i8_XXfntSRvm3Rg",
+        authDomain: "web-notifications-f2cd9.firebaseapp.com",
+        projectId: "web-notifications-f2cd9",
+        storageBucket: "web-notifications-f2cd9.appspot.com",
+        messagingSenderId: "697809198230",
+        appId: "1:697809198230:web:2506f7cd26ea04de83f6b7",
+        measurementId: "G-HXCWB2V578"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(config);
+      const messaging = getMessaging(app)
+
+      getToken({ vapidKey: 'BLpMzBnihqVER_H5d07pnAawJorxvkzpfrbzrjIbOb3Ux6Iwi3jWdWDpT1d7zbRffCHM5adwhXbI-ETtQZbQE1o' }).then((currentToken) => {
+        if (currentToken) {
+          // Send the token to your server and update the UI if necessary
+          // ...
+        } else {
+          // Show permission request UI
+          console.log('No registration token available. Request permission to generate one.');
+          // ...
+        }
+      }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        // ...
+      });
+    </script>
+  </body>
+</html> 
